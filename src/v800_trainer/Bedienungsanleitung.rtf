@@ -1,0 +1,65 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1031\deflangfe1031\deftab708{\fonttbl{\f0\froman\fprq2\fcharset0 Times New Roman;}{\f1\froman\fprq2\fcharset2 Symbol;}{\f2\fmodern\fprq1\fcharset0 Courier New;}}
+{\colortbl ;\red0\green0\blue0;}
+{\stylesheet{ Normal;}{\s1 heading 1;}{\s2 heading 2;}{\s3 heading 3;}}
+{\*\generator Msftedit 5.41.15.1503;}\viewkind4\uc1\pard\nowidctlpar\cf1\f0\fs24 Folgendes ist eine grobe \'dcbersicht \'fcber die Hauptbedienung:  \par
+\pard\nowidctlpar\s2\sb100\sa100\b\fs36 Menus:\par
+\pard\nowidctlpar\s3\sb100\sa100\fs27 Datei:\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\tx720\b0\f1\fs20\'b7\tab\ul\f0\fs24 Rohdaten \'f6ffnen bzw. Alle Rohdaten \'f6ffnen:\ulnone  Es wird eine (bzw. alle entsprechenden Dateien in einem Verzeichnis) importiert. Zur Wahl stehen *.tur und *.dat Dateien \par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\f1\fs20\'b7\tab\ul\f0\fs24 Datei l\'f6schen:\ulnone  die selektierten Dateien werden gel\'f6scht (*tour.txt). Es bleibt ein Merker im Verzeichnis, so dass die Datei in dem Fall, dass der \'dcberschreibemodus deaktiviert ist, nicht erneut in der Dateiliste erscheint wenn Daten mit dem gleichen Startzeitpunkt (Jahr, Monat, Tag, Stunde und Minute) beim Einlesen aus dem Computer oder Importieren auftreten. Erst beim Aktivieren des \'dcberschreibemodus oder l\'f6schen des Merkers in dem Verzeichnis (Datei: "JJJJMMTTSSmm_tour.cfg") werden gel\'f6schte Dateien wieder in die Liste aufgenommen.\par
+\pard\nowidctlpar\par
+\pard\nowidctlpar\s3\sb100\sa100\b\fs27 Bearbeiten:\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\tx720\b0\f1\fs20\'b7\tab\ul\f0\fs24 Tour Editor\ulnone  s.u.\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\f1\fs20\'b7\tab\ul\f0\fs24 Daten empfangen\ulnone : Es wird ein Dialogfenster ge\'f6ffnet. Die \'dcbertragung kann gestartet werden, muss aber nach 3 min abgeschlossen sein (Timeout)! Es kann vorkommen, dass die \'dcbertragung nicht automatisch beendet wird und erst durch den Timeout bzw. manuelles Abbrechen gestoppt wird. In diesem Fall sind Daten bei der \'dcbertragung verloren gegangen. In der Regel hilft ein Rebooten des Systems und ein erneuter \'dcbertragungsversuch. Korrekt empfangene Daten werden abgespeichert und die darin enthaltenen Touren in der Datenliste aufgenommen. Die oberste Datei wird dabei automatisch selektiert.\par
+\pard\nowidctlpar\s3\sb100\sa100\b\fs27 Einstellungen:\par
+\pard\nowidctlpar\b0\fs24 Es wird ein Dialogfenster ge\'f6ffnet, das folgende Einstellungen erm\'f6glicht \par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\tx720\f1\fs20\'b7\tab\ul\f0\fs24 Angabe des Datenverzeichnisses.\ulnone  Die in diesem Verzeichnis gespeicherten Touren werden in der Dateiliste angezeigt. Pflegen der Dateiliste ist \'fcber einen Dateimanager (Windows Explorer) m\'f6glich. Die vom HAC4 / HAC4PRO bzw. CM414 empfangenen Daten werden ebenfalls in diesem Verzeichnis abgelegt (*.dat). Bei \'c4nderungen in diesem Verzeichnis (L\'f6schen; Verschieben) immer die *.cfg und *.txt gemeinsam \'e4ndern!\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\f1\fs20\'b7\tab\ul\f0\fs24 Auswahl der seriellen Schnittstelle\ulnone  (\'fcber Combo Feld). Bei der Verwendung der USB Schnittstelle, muss ggf. vor dem Datenempfang die Einstellung \'fcberpr\'fcft werden.\par
+\f1\fs20\'b7\tab\ul\f0\fs24 Auswahl des "Look & Feel"\ulnone  Eine Java typische Eigenschaft. Die Fenster sind aber nur mit "Java" und "Windows" korrekt darstellbar. "Motiv" funktioniert in der Regel nicht zu 100%\par
+\f1\fs20\'b7\tab\ul\f0\fs24 Aktivieren des \'dcberschreibmodus\ulnone  (*tour.txt und *tour.cfg werden beim Einlesen von Daten ggf. \'fcberschrieben)\par
+\f1\fs20\'b7\tab\ul\f0\fs24 Zeit f\'fcr Gl\'e4ttung der Kurven\ulnone  .  Aufgrund der Speicherintervalle und Speicherinkremente kann es zu unsch\'f6nen Spr\'fcngen in den Kurven kommen. Dies muss \'fcber eine Mittelwertbildung umgangen werden. Die max/min Werte werden von diesen gemittelten Werten bestimmt. Ansonsten w\'fcrden f\'e4lschlich hohe Werte zustande kommen. (Die Hactronic SW mittelt mit fest eingestellten Intervallen)\par
+\f1\fs20\'b7\tab\ul\f0\fs24 Schwelle ab welcher Hm-\'c4nderung die H\'f6henmeter akkumuliert werden sollen.\ulnone  H\'f6hen\'e4nderungen kleiner als dem angegebenen Wert werden nicht zu den H\'f6henmetern addiert. Erst wenn die Schwelle \'fcberschritten wird z\'e4hlt dies zu den akkum. H\'f6henmetern. Es werden dann auch die Hm ber\'fccksichtigt die unter der Schwelle liegen. Bsp.: Schwelle 3 m. Wenn unterhalb von 3 m eine abfallende Strecke kommt wird dieser Anstieg ignoriert. Beginnt erst nach 5 m Steigung die n\'e4chste Gef\'e4llstrecke werden 5m addiert und nicht nur 2 (5-3). Analog gilt dies f\'fcr die Akkumulierung der negativen H\'f6henmetern\par
+\f1\fs20\'b7\tab\f0\fs24 H\'f6hen\'e4nderungen die sich durch die Anpassung der aktuellen H\'f6he ergeben werden unter folgenden Bedingungen nicht ber\'fccksichtigt: \par
+\pard\nowidctlpar\fi-360\li1440\sb100\sa100\tx1440\f2\fs20 o\tab\f0\fs24 am Anfang der Tour (es darf nach dem Starten der Aufzeichnung nicht mehr als 20s vergangen sein bis mit der \'c4nderung begonnen wurde). \par
+\pard\nowidctlpar\fi-360\li1440\sb100\sa100\f2\fs20 o\tab\f0\fs24 Wenn innerhalb einer Tour um mehr als +-130m ge\'e4ndert wird (allerdings sehr unwahrscheinlich)\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\tx720\f1\fs20\'b7\tab\ul\f0\fs24 Histogramme:\ulnone  In den Feldern k\'f6nnen die Eigenschaften f\'fcr die Histogramme ausgew\'e4hlt werden. Dadurch sind nahezu beliebig feine Darstellungen m\'f6glich (Limitiert lediglich durch die HAC-spezifische Datenaufzeichnung, z.B. Hf in 2er Schritten)\par
+\pard\nowidctlpar\f1\'b7\f0   \ul Hilfe:\ulnone  gibt's noch keine!\par
+\pard\nowidctlpar\s2\sb100\sa100\b\fs36 Tour Editor\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\tx720\b0\f1\fs20\'b7\tab\f0\fs24 wird nur gestartet wenn mindestens eine Tour selektiert wurde\par
+\pard\nowidctlpar\fi-360\li720\sb100\sa100\f1\fs20\'b7\tab\f0\fs24 Alle Daten in der Tabelle k\'f6nnen ge\'e4ndert werden (au\'dfer der laufenden Nummer)\par
+\f1\fs20\'b7\tab\f0\fs24 Alle \'c4nderungen werden beim Wechsel \'fcber die ComboBox auf eine andere Tour wieder gel\'f6scht => \ul immer zuerst "Speichern" anklicken\ulnone\par
+\f1\fs20\'b7\tab\f0\fs24 Nivellierung gleicht den Druckunterschied zwischen Tourstart und Tourende aus (Endh\'f6he = Anfangsh\'f6he)\par
+\f1\fs20\'b7\tab\f0\fs24\'dcber L\'f6schen, Kopieren und Einf\'fcgen k\'f6nnen Daten im Block ver\'e4ndert werden\par
+\f1\fs20\'b7\tab\f0\fs24 Verbinden von Touren funktioniert nur, wenn die zu verbindenden Touren vorher (Dateiliste) ausgew\'e4hlt wurden und im Tour Editor zur Verf\'fcgung stehen\par
+\f1\fs20\'b7\tab\f0\fs24 Im Feld "Typ" kann ein eigener Tourtyp generiert werden \'fcber den in der Dateiliste selektiert werden kann (voreingestellt sind die vom HAC4 bzw. CM414 gelieferten Typen)\par
+\f1\fs20\'b7\tab\f0\fs24 Wenn das Datum oder die Uhrzeit ge\'e4ndert wird, wird automatisch eine Kopie der Tour angelegt, das Original muss ggf. in der Dateiliste gel\'f6scht werden (s.O.)\par
+\f1\fs20\'b7\tab\f0\fs24 Alle Funktionen \'fcber die Marken sind noch nicht richtig implementiert! Es k\'f6nnen Marken hinzugef\'fcgt bzw. gel\'f6scht werden. Wenn sich aber bei Einf\'fcgen (Kopie) oder L\'f6schen von Daten die Marken \'e4ndern m\'fcssten wird dies noch nicht ber\'fccksichtigt => der neue Zeitpunkt muss manuell ge\'e4ndert werden. Zudem sind die Marken noch in keiner der Funktionen ber\'fccksichtigt (Graphik bzw. Statistik).\par
+\f1\fs20\'b7\tab\f0\fs24\par
+\pard\nowidctlpar\sa240\par
+\pard\nowidctlpar\s2\sb100\sa100\b\fs36 Register\par
+\pard\nowidctlpar\s3\sb100\sa100\ul\fs27 Datenliste:\ulnone\par
+\pard\nowidctlpar\b0\fs24 Die Datenliste zeigt alle in dem Datenverzeichnis (Anzeige des Pfades in der Titelleiste) gefundenen Touren oder Trainingsdaten (JCicloTronic Format). Mit einem Klick auf die Spaltenbeschriftungen kann nach der entsprechenden Spalte sortiert werden. Wird gleichzeitig die Shift Taste gedr\'fcckt wird in abfallender Reihenfolge sortiert. Die Selektion der Touren erfolgt wie bei einem Explorer (Ausprobieren!). Die Comboboxen unterhalb der Liste erm\'f6glichen eine bequeme Auswahl um damit statistische Auswertungen durch zu f\'fchren. \'dcber das Suchfeld k\'f6nnen W\'f6rter im Titel gesucht werden. Die entsprechende Datei wird selektiert. Die Selektion wird additiv durchgef\'fchrt, d.h. die bisher selektierten Dateien bleiben selektiert. Durch Vorstellung von ~ (Tilde) werden die gefundenen Dateien deselektiert.\par
+\pard\nowidctlpar\s3\sb100\sa100\ul\b\fs27 Infos\ulnone\par
+\pard\nowidctlpar\b0\fs24 Hier werden die Tourinfos angezeigt. Sie k\'f6nnen einfach editiert und abgespeichert werden. Einzig die Marken k\'f6nnen nicht ge\'e4ndert werden, dazu ist der Wechsel in den Toureditor notwendig. \'dcber "Kopieren" und "Einf\'fcgen" k\'f6nnen alle Eingabefelder von einer Tour bequem in eine andere Tour \'fcbernommen werden (nicht \'fcber die Zwischenablage, d.h. Strg C l\'f6scht diese Daten nicht). "Speichern" sichert die Daten.\par
+\pard\nowidctlpar\s3\sb100\sa100\ul\b\fs27 Statistik\ulnone\par
+\pard\nowidctlpar\b0\fs24 Hier werden die statistischen Kenngr\'f6\'dfen der selektierten Daten angezeigt. Mit der Combobox k\'f6nnen die in der Datenliste selektieren Touren noch einmal ausgew\'e4hlt werden. Der erste Eintrag in der Combobox ist die Summenstatistik. Wird eine Tour \'fcber diese Combobox ausgew\'e4hlt so wird diese auch bei allen anderen Registern ausgewertet (Graphik, Histogramm). \par
+\pard\nowidctlpar\s3\sb100\sa100\ul\b\fs27 Graphik\ulnone\par
+\pard\nowidctlpar\b0\fs24 Die graphische Auswertung erkl\'e4rt sich mehr oder weniger von selber. Durch Aufziehen eines Rechteckes mit der Maus wird gezoomt. Zur\'fccksetzen des Zooms geschieht entweder durch Anklicken einer der Selektionsfelder oder durch zoomen nach links oben.\line Besonders hinzuweisen ist auf die Auswahl des "Zeit-/Streckenabstandes". Damit kann man beim Vergleich zweier gleicher Strecken sehen wie viel Zeit- oder Streckenunterschied zum jeweiligen Zeit- bzw. Streckenabschnitt bestanden hat. Dies gibt die wohl beste Vergleichsm\'f6glichkeit wo man besonders gut war bzw. besonders viel Zeit verloren hat. \par
+Das Kontextmenu (rechte Maus) erlaubt die Einstellung der Farben und erm\'f6glicht den Ausdruck der Graphik (dank jfreechart).\par
+\pard\nowidctlpar\s3\sb100\sa100\ul\b\fs27 Histogramme\ulnone\par
+\pard\nowidctlpar\b0\fs24 Hier werden vier Histogramme (Herzfrequenz, Steigung m/min; Geschwindigkeit und Trittfrequenz) angeboten. \'dcber die "Einstellungen" k\'f6nnen die Auswertungen entsprechend fein eingestellt werden. \par
+\par
+\pard\nowidctlpar\s3\sb100\sa100\ul\b\fs27 Jahres\'fcbersicht\par
+\pard\nowidctlpar\ulnone\b0\fs24\par
+Gibt den Verlauf der Trainingszeit, Trainingskilometer und Trainingsh\'f6henmeter an. Beim Vergleich mit einem Jahr werden \'8412 Monate\ldblquote  Verl\'e4ufe generiert.\par
+Wird die Monats\'fcbersicht angew\'e4hlt werden pro Monat Balken der Trainingszeit \endash kilometer und \endash  H\'f6he dargestellt\par
+\par
+\pard\nowidctlpar\s3\sb100\sa100\ul\b\fs27 Credits:\par
+\pard\nowidctlpar\ulnone\b0\fs24\par
+Sun.org.java: f\'fcr die kostenlose Bereitstellung der JAVA DE und Netbeans als gute freie IDE\par
+Jfreechart: f\'fcr die kostenlose Bereitstellung der gro\'dfartigen Graphikbibliothek\par
+Steffen Pingel: f\'fcr die Analyse des HAC4 Rohdatenformates\par
+\par
+\par
+\par
+}
+ 

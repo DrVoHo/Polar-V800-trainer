@@ -1,0 +1,18 @@
+V800 Trainer Features:
+
+- Einlesen der V800 Trainingsdaten über USB; automatische Speicherung der Rohdaten; Auswertung der Rohdaten und importieren in die Datenbank
+- Auflistung aller Touren in einem Verzeichnis (s. Einstellungen).
+- Auswahl beliebiger Touren über Maus bzw. automatische Selektion (Woche, Monat, Jahr, Kalenderjahr,Typ...)
+- Selektierte Touren werden bei Information; Statistik; Graphik bzw. Histogramm über ein Combo-Feld nochmals angeboten und können einzeln bzw. als Summe ausgewählt werden.
+- Sortieren der Liste nach Datum; Strecke; Zeit bzw. Titel (auf- und absteigend)
+- Anzeige der Informationen zu den selektierten Touren (Titel; Name; Startort....)
+- Ermittlung der statistischen Werte aller selektieren Touren. 
+- Graphische Darstellung aller selektieren Touren: über Zeit bzw. Stecke; mit Zoomfunktion
+- Histogramme (Herzfrequ.; Steigung m/min; Geschw.; und Cadence)
+- Anzeige der Tour auf Openstreet map
+- Zuordnung und Anzeige von *.kmz und *.gpx Dateien zu den Trainingseinheiten (Infos)
+- Importieren von *.tur Dateien
+- Importieren von *.dat Dateien (HAC4 bzw. CM414)
+- Importieren von *.hrm Daten (z.B. RS800)
+- Importieren von Polar Flow *.csv Export Dateien
+
