@@ -1,4 +1,4 @@
-# V800-trainer
+ # V800-trainer
 - Einlesen der V800 Trainingsdaten über USB; automatische Speicherung der Rohdaten; Auswertung der Rohdaten und importieren in die Datenbank
 - Auflistung aller Touren in einem Verzeichnis (s. Einstellungen).
 - Auswahl beliebiger Touren über Maus bzw. automatische Selektion (Woche, Monat, Jahr, Kalenderjahr,Typ...)
@@ -8,7 +8,7 @@
 - Ermittlung der statistischen Werte aller selektieren Touren. 
 - Graphische Darstellung aller selektieren Touren: über Zeit bzw. Stecke; mit Zoomfunktion
 - Histogramme (Herzfrequ.; Steigung m/min; Geschw.; und Cadence)
-- Anzeige der Tour auf Openstreet map
+- Anzeige der Tour auf Openstreet map / Virtual World (Satelit / Karte)
 - Zuordnung und Anzeige von *.kmz und *.gpx Dateien zu den Trainingseinheiten (Infos)
 - Importieren von *.tur Dateien
 - Importieren von *.dat Dateien (HAC4 bzw. CM414)
