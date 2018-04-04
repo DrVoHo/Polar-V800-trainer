@@ -345,6 +345,7 @@ public class TrainingSession {
 
         return parsePhysicalInformation(file);
         }
+
     }
 
     private HashMap parseRoute(InputStream data) {
@@ -860,6 +861,7 @@ private Properties getDataProperty(){
     
     DataProperty.setProperty("Computer", "Polar_V/M_Serie");  
     HashMap temp2 = null;
+    ArrayList temp3 = null;
    
     HashMap temp = firstMap((ArrayList) parsedSession.get("start"));
     if(temp!=null) temp2 = firstMap((ArrayList) temp.get("date"));
@@ -885,15 +887,22 @@ private Properties getDataProperty(){
     if(dummylist !=null) Strecke = (float)dummylist.get(0);
     DecimalFormat formatb = new java.text.DecimalFormat("0.00");
     DataProperty.setProperty("Strecke", formatb.format(Strecke/1000.0)); 
-    DataProperty.setProperty("Kalorien",  ((ArrayList) parsedSession.get("calories")).get(0).toString()); 
+    dummylist = (ArrayList) parsedSession.get("calories");
+    if (dummylist !=null) DataProperty.setProperty("Kalorien",  dummylist.get(0).toString()); 
     
     temp2 = firstMap((ArrayList) parsedSession.get("training-load"));
-    if(temp2!=null)DataProperty.setProperty("Belastung",  ((ArrayList) temp2.get("load-value")).get(0).toString()); 
-    if(temp2!=null)DataProperty.setProperty("Erholungszeit", ""+TimetoSeconds(firstMap((ArrayList)temp2.get("recovery-time")))); 
-    if(temp2!=null)DataProperty.setProperty("Kohlenhydrate", ((ArrayList) temp2.get("carbs")).get(0).toString());
-    if(temp2!=null)DataProperty.setProperty("Proteine", ((ArrayList) temp2.get("protein")).get(0).toString());
-    if(temp2!=null)DataProperty.setProperty("Fett", ((ArrayList) temp2.get("fat")).get(0).toString());
-     
+    if (temp2!=null) temp3 = (ArrayList) temp2.get("load-value");
+    if(temp3!=null)DataProperty.setProperty("Belastung",  ((ArrayList) temp2.get("load-value")).get(0).toString()); 
+    if (temp2!=null) temp3 = (ArrayList) temp2.get("recovery-time");
+    if(temp3!=null)DataProperty.setProperty("Erholungszeit", ""+TimetoSeconds(firstMap((ArrayList)temp2.get("recovery-time")))); 
+    if (temp2!=null) temp3 = (ArrayList) temp2.get("carbs");
+    if(temp3!=null)DataProperty.setProperty("Kohlenhydrate", ((ArrayList) temp2.get("carbs")).get(0).toString());
+    if (temp2!=null) temp3 = (ArrayList) temp2.get("protein");
+    if(temp3!=null)DataProperty.setProperty("Proteine", ((ArrayList) temp2.get("protein")).get(0).toString());
+    if (temp2!=null) temp3 = (ArrayList) temp2.get("fat");
+    if(temp3!=null)DataProperty.setProperty("Fett", ((ArrayList) temp2.get("fat")).get(0).toString());
+    
+    
     temp = firstMap((ArrayList) create.get("running-index"));
     if(temp!=null) DataProperty.setProperty("Running-Index",((ArrayList) temp.get("value")).get(0).toString());
     
@@ -901,7 +910,7 @@ private Properties getDataProperty(){
      if(temp2!=null)DataProperty.setProperty("Typ", ((ArrayList) temp2.get("text")).get(0).toString());
 
      temp = firstMap((ArrayList) parsedPhysicalInformation.get("birthday"));
-     
+     temp2 = null;
     if(temp!=null) temp2 = firstMap((ArrayList) temp.get("value"));
     if(temp2!=null) DataProperty.setProperty("Geburtsdatum", ((ArrayList) temp2.get("day")).get(0).toString()+"."+
                                                            ((ArrayList) temp2.get("month")).get(0).toString()+"."+

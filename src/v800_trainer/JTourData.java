@@ -487,7 +487,7 @@ public class JTourData extends Object {
             Streckenskala[i] = i / (float) Teiler;
             j = 0;
             //Umrechnung von feste Zeitintervallen auf feste Streckenintervallen
-            while (Strecke_gesZeit[j] < Streckenskala[i] && Strecke_gesZeit[j + 1] < Streckenskala[i] && j < Datenpunkte - 1) {
+            while (Strecke_gesZeit[j] < Streckenskala[i] && Strecke_gesZeit[j + 1] < Streckenskala[i] && j < Datenpunkte - 2) {
                 j++;
             }
             ZeitüberStrecke[i] = java.lang.Math.round(gesZeit[j] + (gesZeit[j + 1] - gesZeit[j])

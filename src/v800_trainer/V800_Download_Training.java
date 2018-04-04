@@ -256,7 +256,8 @@ public class V800_Download_Training {
                     files = get_V800_data("/U/0/" + dates.get(dates_iter) + "E/" + times.get(times_iter) + "00/", 0, false);
 
                     for (files_iter = 0; files_iter < files.size(); files_iter++) {
-                        if (files.get(files_iter).matches("SAMPLES.GZB") == true) //QString(files[files_iter]).compare(tr("SAMPLES.GZB")) == 0)
+                     //   if (files.get(files_iter).matches("SAMPLES.GZB") == true) //QString(files[files_iter]).compare(tr("SAMPLES.GZB")) == 0)
+                       if (files.get(files_iter).contains("SAMPLES") == true)
                         {
                             session_exists = true;
                             break;
@@ -271,6 +272,7 @@ public class V800_Download_Training {
                 }
             }
         }
+        
         return sessions;
     }
 
@@ -366,7 +368,7 @@ public class V800_Download_Training {
                     break;
             }
         }
-
+       
         return dir_and_files;
     }
 
@@ -435,7 +437,7 @@ public class V800_Download_Training {
                             data_OK=check_array(full,tempdata);
                             if(!data_OK){
                                 if(retry!=0){
-                                    System.out.println("Datenlesefehler Wiederholung  " + retry);
+                                    System.out.println("Datenlesefehler Wiederholung  " + request + "  " + retry);
                                 }
                                 retry++;
                                 tempdata = (ArrayList<Byte>) full.clone();
@@ -447,6 +449,7 @@ public class V800_Download_Training {
                             }
                             if (!request.contains(".")) {
                                 data = extract_dir_and_files(full);
+                                retry=retry;
                             } else if (request.contains("/E/")) {
                                 session_split = new ArrayList();
                                 Collections.addAll(session_split, request.split("/"));
@@ -510,6 +513,10 @@ public class V800_Download_Training {
             }
         } catch (Exception e) {
             System.out.println("Fehler in get_V800_data 509 " + e + " " + e.getStackTrace());
+
+        }
+        for (int i=0;i<data.size();i++){
+            System.out.println("" + request + " " + data.get(i) + "\n");
         }
         return data;
     }

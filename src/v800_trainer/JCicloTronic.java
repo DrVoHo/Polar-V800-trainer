@@ -47,12 +47,41 @@ import javax.swing.JPanel;
 
 import java.util.ArrayList;
 
-import org.jdesktop.swingx.JXMapViewer;
+//import org.jdesktop.swingx.JXMapViewer;
 
-import org.jdesktop.swingx.JXMapKit.DefaultProviders;
-import org.jdesktop.swingx.mapviewer.GeoPosition;
+import org.jxmapviewer.JXMapViewer;
+
+//import org.jdesktop.swingx.JXMapKit.DefaultProviders;
+//import org.jdesktop.swingx.mapviewer.GeoPosition;
 import java.awt.geom.Point2D;
-import org.jdesktop.swingx.painter.Painter;
+//import org.jdesktop.swingx.painter.Painter;
+
+
+
+
+//import org.jxmapviewer.OSMTileFactoryInfo;
+
+//import org.jxmapviewer.viewer.DefaultTileFactory;
+
+import org.jxmapviewer.viewer.GeoPosition;
+
+//import org.jxmapviewer.viewer.TileFactoryInfo;
+
+// import org.jxmapviewer.JXMapKit.DefaultProviders;
+
+import org.jxmapviewer.painter.Painter;
+
+import org.jxmapviewer.painter.CompoundPainter;
+
+
+import org.jxmapviewer.viewer.DefaultWaypoint;
+
+import org.jxmapviewer.viewer.Waypoint;
+
+import org.jxmapviewer.viewer.WaypointPainter;
+
+
+      
 
 
 import org.jfree.chart.ChartPanel;
@@ -74,6 +103,9 @@ import javax.swing.filechooser.FileFilter;
 //import org.jdesktop.swingx.mapviewer.TileFactory;
 //import org.jdesktop.swingx.mapviewer.TileFactoryInfo;
 import org.jfree.data.time.Second;
+import org.jxmapviewer.OSMTileFactoryInfo;
+import org.jxmapviewer.VirtualEarthTileFactoryInfo;
+import org.jxmapviewer.viewer.DefaultTileFactory;
 
 public class JCicloTronic extends javax.swing.JFrame {
 
@@ -241,7 +273,13 @@ public class JCicloTronic extends javax.swing.JFrame {
 
   
         setFileChooserFont(chooser.getComponents());
-
+        locmap = true;
+        Map_Type.removeAllItems();
+        Map_Type.addItem("OpenStreetMap");
+        Map_Type.addItem("Virtual Earth Map");
+        Map_Type.addItem("Virtual Earth Satelite");
+        Map_Type.addItem("Virtual Earth Hybrid");
+        locmap = false;
     //    ChangeModel();
     }
 
@@ -269,9 +307,26 @@ public class JCicloTronic extends javax.swing.JFrame {
 
         if (mapKit != null) {
             mapKit.setSize(Map_internal_Panel.getSize());
+            if (Update_Map_paint) {
+                int zoom = mapKit.getMainMap().getZoom();
+                GeoPosition Center = mapKit.getMainMap().getCenterPosition();
+
+                Draw_Map();
+
+                mapKit.setCenterPosition(Center);
+                int minzoom = mapKit.getMainMap().getTileFactory().getInfo().getMinimumZoomLevel();
+                if (minzoom <= zoom) {
+                    mapKit.getMainMap().setZoom(zoom);
+                } else {
+                    mapKit.getMainMap().setZoom(minzoom);
+                }
+
+            }
+    
         }
 
         super.repaint();
+           
     }
 
     /** This method is called from within the constructor to
@@ -455,6 +510,7 @@ public class JCicloTronic extends javax.swing.JFrame {
         Map_internal_Panel = new javax.swing.JPanel();
         jLabel_map_streckenlänge = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
+        Map_Type = new javax.swing.JComboBox<>();
         Jahresuebersicht_Panel = new javax.swing.JPanel();
         Auswahl_Übersicht = new javax.swing.JComboBox();
         JahrVergleich = new javax.swing.JComboBox();
@@ -1413,11 +1469,11 @@ public class JCicloTronic extends javax.swing.JFrame {
 
         Graphik_Panel.setMinimumSize(new java.awt.Dimension(22, 22));
         Graphik_Panel.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentHidden(java.awt.event.ComponentEvent evt) {
-                Graphik_PanelComponentHidden(evt);
-            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 Graphik_PanelComponentShown(evt);
+            }
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                Graphik_PanelComponentHidden(evt);
             }
         });
         java.awt.GridBagLayout Graphik_PanelLayout = new java.awt.GridBagLayout();
@@ -1793,7 +1849,7 @@ public class JCicloTronic extends javax.swing.JFrame {
             }
         });
         java.awt.GridBagLayout Map_PanelLayout = new java.awt.GridBagLayout();
-        Map_PanelLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0};
+        Map_PanelLayout.columnWidths = new int[] {0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0, 5, 0};
         Map_PanelLayout.rowHeights = new int[] {0, 5, 0, 5, 0};
         Map_Panel.setLayout(Map_PanelLayout);
 
@@ -1816,7 +1872,7 @@ public class JCicloTronic extends javax.swing.JFrame {
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 6;
+        gridBagConstraints.gridx = 10;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
@@ -1824,7 +1880,7 @@ public class JCicloTronic extends javax.swing.JFrame {
 
         Kein_kmz_text.setText("Kein Log File");
         gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridx = 6;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -1835,7 +1891,7 @@ public class JCicloTronic extends javax.swing.JFrame {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
-        gridBagConstraints.gridwidth = 9;
+        gridBagConstraints.gridwidth = 11;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
         gridBagConstraints.weightx = 1.0;
@@ -1853,6 +1909,19 @@ public class JCicloTronic extends javax.swing.JFrame {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 0;
         Map_Panel.add(jLabel27, gridBagConstraints);
+
+        Map_Type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        Map_Type.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Map_TypeActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 8;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.insets = new java.awt.Insets(5, 0, 0, 0);
+        Map_Panel.add(Map_Type, gridBagConstraints);
 
         Hauptfenster.addTab("Landkarte", Map_Panel);
 
@@ -2812,6 +2881,7 @@ int i = 1;
           xygraphik = null;
           graph_min = 0;
           graph_max = 999999999;
+          graph_crosshair = 0;
           nozoom = true;
    
           Update_Map_paint = true;
@@ -2898,7 +2968,8 @@ int i = 1;
                         //                      data[j][1] = new String(DataProperty.getProperty("Strecke") + " ");
                         datab[2] = new String("  " + HMS(java.lang.Integer.parseInt(DataProperty.getProperty("Dauer", "0"))));
                         datab[3] = new String(DataProperty.getProperty("Titel", "---"));
-                        datab[4] = new String(DataProperty.getProperty("Jahr", "1111") + "." + DataProperty.getProperty("Monat", "11") + "." + DataProperty.getProperty("Tag", "11"));
+                        datab[4] = new String(DataProperty.getProperty("Jahr", "1111") + "." + DataProperty.getProperty("Monat", "11") + "." 
+                                        + DataProperty.getProperty("Tag", "11") + "." + DataProperty.getProperty("Stunde","12") + "." + DataProperty.getProperty("Minute","59"));
                         datab[5] = new String(Filename.substring(0, Filename.lastIndexOf('.')));
                         datab[6] = new String(DataProperty.getProperty("Typ", "unbekannt"));
                         hmString = ""+  (int) Float.parseFloat(DataProperty.getProperty("Hoehenmeter", "0"));
@@ -2911,6 +2982,8 @@ int i = 1;
 
             } catch (Exception e) {
               System.out.println("NEW IO-Fehler bei " + path.getPath() + SystemProperties.getProperty("file.separator") + list[i] + "\n " + e +"   " + e.getLocalizedMessage() + "--File deleted");
+              e.printStackTrace();
+              JOptionPane.showMessageDialog(null, "Fehler beim Einlesen eines cfg Files " +path.getPath() + SystemProperties.getProperty("file.separator") + list[i] +"\n  wurde gelöscht!", "Achtung!", JOptionPane.ERROR_MESSAGE);
         File deletefile = new File(path.getPath() + SystemProperties.getProperty("file.separator") + list[i]);
            if(deletefile.exists()) deletefile.delete();
            ChangeModel();
@@ -3450,6 +3523,7 @@ int i = 1;
       if (Update_Map_paint == true) {
           Draw_Map();
       }
+ //      Draw_Map();
       setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 
 
@@ -3623,6 +3697,25 @@ int i = 1;
         ChangeModel();
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_jMenu_V800_LadenMouseClicked
+
+    private void Map_TypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Map_TypeActionPerformed
+        // TODO add your handling code here:
+        if (!locmap && mapKit!=null){
+          int zoom = mapKit.getMainMap().getZoom();
+          GeoPosition Center = mapKit.getMainMap().getCenterPosition();
+               
+           Draw_Map();  
+           
+        mapKit.setCenterPosition(Center);
+        int minzoom = mapKit.getMainMap().getTileFactory().getInfo().getMinimumZoomLevel();
+        if (minzoom <= zoom)
+               mapKit.getMainMap().setZoom(zoom);
+                        else
+               mapKit.getMainMap().setZoom(minzoom);
+            
+        }
+           
+    }//GEN-LAST:event_Map_TypeActionPerformed
 
   
     
@@ -4947,7 +5040,11 @@ try{
 
             BufferString = BufferString.append(format.format(Geschw * 100)).append('\t');
 
-            BufferString = BufferString.append(format.format(Temperatur * 10)).append('\n');
+            if (Temperatur >=0){
+                BufferString = BufferString.append(format.format(Temperatur * 10)).append('\n');
+            } else {
+                BufferString = BufferString.append(formatneg.format(Temperatur * 10)).append('\n');
+            }
             
             Zeitpunkt += Intervall;
         }
@@ -5890,15 +5987,25 @@ try{
             mapKit = null;
         }
 
-        mapKit = new org.jdesktop.swingx.JXMapKit();
+       mapKit = new org.jxmapviewer.JXMapKit();
+       
         mapKit.setName("mapKit");
 
         mapKit.setPreferredSize(Map_internal_Panel.getSize());
 
         Map_internal_Panel.add(mapKit, java.awt.BorderLayout.CENTER);
 
-        mapKit.setDefaultProvider(DefaultProviders.OpenStreetMaps);
+    //    mapKit.setDefaultProvider(DefaultProviders.OpenStreetMaps);
+    if(Map_Type.getSelectedIndex()==0)
+         mapKit.getMainMap().setTileFactory(new DefaultTileFactory(new OSMTileFactoryInfo()));
+    if(Map_Type.getSelectedIndex()==1)
+        mapKit.getMainMap().setTileFactory(new DefaultTileFactory(new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.MAP))); 
+    if(Map_Type.getSelectedIndex()==2)
+        mapKit.getMainMap().setTileFactory(new DefaultTileFactory(new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.SATELLITE))); 
+    if(Map_Type.getSelectedIndex()==3)
+        mapKit.getMainMap().setTileFactory(new DefaultTileFactory(new VirtualEarthTileFactoryInfo(VirtualEarthTileFactoryInfo.HYBRID))); 
  
+        
         int j = Auswahl_Map.getSelectedIndex();
 
         if (j == 0) {
@@ -5925,6 +6032,7 @@ try{
 
         from_x = 0;
         to_x = 999999999;
+        mark_x = 0;
         if (j == 0) {
 
             int Anzahl_Kurven = Integer.parseInt(Properties.getProperty("AnzahlKurven", "5")) + 1;
@@ -5957,7 +6065,7 @@ try{
 
         if (j != 0
                 && Auswahl_Map.getSelectedIndex() <= Integer.parseInt(Properties.getProperty("AnzahlKurven", "5"))) {
-
+// Markierung aus Zoombereich auslesen
             int i = 0;
             if (Graphik_Radio_Strecke.isSelected() == true) {
 
@@ -5983,7 +6091,27 @@ try{
 
                 to_x = Statistikhandle.TourData[j].Strecke_gesZeit[i];
             }
+// Streckenmarkierung (crosshair) auslesen
+            
+            i = 0;
+            if (Graphik_Radio_Strecke.isSelected() == true) {
 
+                while (Statistikhandle.TourData[j].Strecke_gesZeit[i] < graph_crosshair && i + 1 < Datenp) {
+                    i++;
+                }
+                mark_x = Statistikhandle.TourData[j].Strecke_gesZeit[i];
+                
+            } else {
+
+                while (Statistikhandle.TourData[j].gesZeit[i] < graph_crosshair && i + 1 < Datenp) {
+                    i++;
+                }
+
+                mark_x = Statistikhandle.TourData[j].Strecke_gesZeit[i];
+              
+            }
+
+            
             double distance = 0;
             int selection = 0;
 
@@ -6035,24 +6163,29 @@ try{
         }
 
         mapKit.setCenterPosition(new GeoPosition(((map_x_max + map_x_min) / 2), ((map_y_max + map_y_min) / 2)));
-        mapKit.setZoom(1);
 
         Point2D pointa = mapKit.getMainMap().convertGeoPositionToPoint(new GeoPosition(map_x_max, map_y_max));
         Point2D pointb = mapKit.getMainMap().convertGeoPositionToPoint(new GeoPosition(map_x_min, map_y_min));
-        double recta = 0;
+        double rectX = Map_internal_Panel.getWidth();
+        double rectY = Map_internal_Panel.getHeight();
 
-        for (int i = 1; i < 15; i++) {
-            mapKit.setZoom(15 - i);
-            recta = mapKit.getMainMap().getTileFactory().getMapSize(i).getWidth() * mapKit.getMainMap().getTileFactory().getTileSize(i);
-
-            if (recta < 2 * pointa.getX() || recta < 2 * pointb.getY()) {
-
-                mapKit.setZoom(17 - i);
-
+        int maxzoom = mapKit.getMainMap().getTileFactory().getInfo().getMaximumZoomLevel();
+        double deltaX = 0;
+        double deltaY = 0;
+        for (int i = 0; i < maxzoom; i++) {
+ 
+        mapKit.getMainMap().setZoom(maxzoom-i);  
+        pointa = mapKit.getMainMap().convertGeoPositionToPoint(new GeoPosition(map_x_max, map_y_max));
+        pointb = mapKit.getMainMap().convertGeoPositionToPoint(new GeoPosition(map_x_min, map_y_min));
+        deltaX = pointa.getX()- pointb.getX();
+        deltaY = pointb.getY()- pointa.getY();
+            if (rectX <  deltaX || rectY <  deltaY) {
+            mapKit.getMainMap().setZoom(maxzoom-i+1);  
                 break;
             }
 
         }
+
 
         if (Auswahl_Map.getSelectedIndex() != 0) {
             this.jLabel27.setEnabled(true);
@@ -6061,13 +6194,74 @@ try{
             this.jLabel27.setEnabled(false);
         }
 
-        mapKit.getMainMap().setOverlayPainter(lineOverlay);
+      
 
+        read_Waypoint(); 
+        
+        DefaultWaypoint Mark = new DefaultWaypoint(Markierung);
+        
+      
+        
+        Set<Waypoint> waypoints = new HashSet<Waypoint>(Arrays.asList(new DefaultWaypoint( Markierung)));
+      
+            
+        WaypointPainter waypointPainter = new WaypointPainter();
+
+        waypointPainter.setWaypoints(waypoints); 
+        
+        ArrayList painters = new ArrayList();
+
+
+        painters.add(lineOverlay); 
+        
+        painters.add(waypointPainter);
+
+
+
+        CompoundPainter<JXMapViewer> painter = new CompoundPainter<JXMapViewer>(painters);
+
+   
+        mapKit.getMainMap().setOverlayPainter(painter);
+        
+        
         repaint();
+        Update_Map_paint = true;
 
     }
+    
+    void read_Waypoint() {
+        Markierung = new GeoPosition(0, 0);
+     
+        if (Auswahl_Map.getSelectedIndex()==0) return;
+  
+        double Strecke = 0;
+
+        int j = Auswahl_Map.getSelectedIndex() - 1;
+
+        for (int i = 0; i < Statistikhandle.TourData[j + 1].GeoDataArray.size(); i = i + 2) {
+            if (i != 0) {
+                Strecke = Strecke + distFrom(Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i - 1)),
+                        Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i - 2)),
+                        Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i + 1)),
+                        Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i)));
+
+            }
+
+            if (Strecke > mark_x && Markierung.getLatitude() == 0) {
+                Markierung = new GeoPosition(Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i + 1)),
+                        Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i)));
+                break;
+            }
+        }
+
+    }
+    
+    
+    
     Painter<JXMapViewer> lineOverlay = new Painter<JXMapViewer>() {
 
+        
+        
         @Override
         public void paint(Graphics2D g, JXMapViewer map, int w, int h) {
 
@@ -6089,6 +6283,8 @@ try{
 
             double geoX;
             double geoY;
+            
+            
 
             double Strecke = 0;
 
@@ -6116,6 +6312,7 @@ try{
                 lastX = -1;
                 lastY = -1;
                 color = getColor(m + 1);
+            
                 for (int i = 0; i < Statistikhandle.TourData[j + 1].GeoDataArray.size(); i = i + 2) {
                     if (i != 0) {
                         Strecke = Strecke + distFrom(Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i - 1)),
@@ -6124,9 +6321,10 @@ try{
                                 Double.parseDouble(Statistikhandle.TourData[j + 1].GeoDataArray.get(i)));
 
                     }
-
+                    
+                                
                     if (Strecke < from_x || Strecke > to_x) {
-                        g.setColor(Color.GRAY);
+                        g.setColor(Color.BLACK);
                     } else {
                         g.setColor(color);
                     }
@@ -6143,8 +6341,17 @@ try{
                     lastY = (int) pt.getY();
                 }
             }
+            
             g.dispose();
+            
+   
         }
+        
+        
+  
+            
+        
+        
     };
 
 
@@ -6368,6 +6575,7 @@ try{
 
            graph_min = Panelb.getChart().getXYPlot().getDomainAxis().getLowerBound();
            graph_max = Panelb.getChart().getXYPlot().getDomainAxis().getUpperBound();
+           graph_crosshair = Panelb.getChart().getXYPlot().getDomainCrosshairValue();
 
            if (j != 0 && Graphik_Radio_Strecke.isSelected() == false) {
                Stunden = (int) (Statistikhandle.TourData[j].gesZeit[0] / 3600);
@@ -6387,6 +6595,7 @@ try{
                        Statistikhandle.TourData[j].Jahr);
                graph_min = (graph_min - offsetsecond.getFirstMillisecond()) / 1000;
                graph_max = (graph_max - offsetsecond.getFirstMillisecond()) / 1000;
+               graph_crosshair = (graph_crosshair - offsetsecond.getFirstMillisecond()) / 1000;
            }
            if (j == 0 && Graphik_Radio_Strecke.isSelected() == false) {
                Stunden = 0;
@@ -6399,6 +6608,7 @@ try{
                        1900);
                graph_min = (graph_min - offsetsecond.getFirstMillisecond()) / 1000;
                graph_max = (graph_max - offsetsecond.getFirstMillisecond()) / 1000;
+               graph_crosshair = (graph_crosshair - offsetsecond.getFirstMillisecond()) / 1000;
            }
 
        }
@@ -6461,6 +6671,7 @@ try{
     private javax.swing.JLabel Kein_kmz_text;
     private javax.swing.JButton LoadGoogleEarth;
     private javax.swing.JPanel Map_Panel;
+    private javax.swing.JComboBox<String> Map_Type;
     private javax.swing.JPanel Map_internal_Panel;
     private javax.swing.JLabel Statistik_Belastung;
     private javax.swing.JPanel Statistik_Cadence;
@@ -6661,13 +6872,14 @@ try{
     int oldselection; //für jComboBoxMarkenZeit benötigt, um Einträge ändern zu können
     public boolean Editmode = false;
     public ImageIcon icon;
-    public org.jdesktop.swingx.JXMapKit mapKit;
+    public org.jxmapviewer.JXMapKit mapKit;
     public double map_x_max;
     public double map_x_min;
     public double map_y_max;
     public double map_y_min;
     public double from_x;
     public double to_x;
+    public double mark_x;
     public GeoPosition MapCenter;
     public int MapZoom;
     public boolean Mapdrawn = false;
@@ -6679,6 +6891,7 @@ try{
     public int Sekunden;
 
     public double graph_min = 0, graph_max = 999999999;
+    public double graph_crosshair =0;
 
     public int FontSize;
     public String Font;
@@ -6688,5 +6901,8 @@ try{
 //    public hrmcom.POLAR_EXERCISEFILE pef;
 
     public ProgressMonitor pm;
+    
+    boolean locmap = true;
+    GeoPosition Markierung = new GeoPosition(0,0);
 
 }

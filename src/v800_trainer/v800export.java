@@ -206,7 +206,7 @@ public class v800export {
             }
         }
 
-        file = new File(session_path + "/ROUTE.GZB");
+        file = new File(session_path + "/ROUTE.GZB"); //V800
         new_file = session_path + "/v2-users-0000000-training-sessions-" + session + "-exercises-" + session + "-route";//.arg(session_path).arg(session);
         if (file.exists() == true) {
             try {
@@ -215,7 +215,16 @@ public class v800export {
             }
         }
 
-        file = new File(session_path + "/SAMPLES.GZB");
+       file = new File(session_path + "/ROUTE.BPB"); //für die Zukunft - momentan nicht verwendet
+        new_file = session_path + "/v2-users-0000000-training-sessions-" + session + "-exercises-" + session + "-route";//.arg(session_path).arg(session);
+        if (file.exists() == true) {
+            try {
+                copyFile(file, new File(new_file));
+            } catch (Exception e) {
+            }
+        }
+        
+        file = new File(session_path + "/SAMPLES.GZB"); //V800
         new_file = session_path + "/v2-users-0000000-training-sessions-" + session + "-exercises-" + session + "-samples";//.arg(session_path).arg(session);
         if (file.exists() == true) {
             try {
@@ -224,6 +233,17 @@ public class v800export {
             }
         }
 
+        file = new File(session_path + "/SAMPLES.BPB"); //M460
+        new_file = session_path + "/v2-users-0000000-training-sessions-" + session + "-exercises-" + session + "-samples";//.arg(session_path).arg(session);
+        if (file.exists() == true) {
+            try {
+                copyFile(file, new File(new_file));
+            } catch (Exception e) {
+            }
+        }        
+        
+        
+        
         file = new File(session_path + "/STATS.BPB");
         new_file = session_path + "/v2-users-0000000-training-sessions-" + session + "-exercises-" + session + "-statistics";//.arg(session_path).arg(session);
         if (file.exists() == true) {
