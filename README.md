@@ -1,5 +1,5 @@
  # V800-trainer
-- Einlesen der V800 Trainingsdaten über USB; automatische Speicherung der Rohdaten; Auswertung der Rohdaten und importieren in die Datenbank
+- Einlesen der V800 / M450 / M460 Trainingsdaten über USB; automatische Speicherung der Rohdaten; Auswertung der Rohdaten und importieren in die Datenbank (andere aktuelle Polar Produkte können funktionieren, sind aber nicht getestet)
 - Auflistung aller Touren in einem Verzeichnis (s. Einstellungen).
 - Auswahl beliebiger Touren über Maus bzw. automatische Selektion (Woche, Monat, Jahr, Kalenderjahr,Typ...)
 - Selektierte Touren werden bei Information; Statistik; Graphik bzw. Histogramm über ein Combo-Feld nochmals angeboten und können einzeln bzw. als Summe ausgewählt werden.
@@ -10,6 +10,7 @@
 - Histogramme (Herzfrequ.; Steigung m/min; Geschw.; und Cadence)
 - Anzeige der Tour auf Openstreet map / Virtual World (Satelit / Karte)
 - Zuordnung und Anzeige von *.kmz und *.gpx Dateien zu den Trainingseinheiten (Infos)
+- Editieren der Trainingsdaten (Zusammenfügen von Training; Korrektur Höhendrift; Korrektur Schrittweite oder Raddurchmesser)
 - Importieren von *.tur Dateien
 - Importieren von *.dat Dateien (HAC4 bzw. CM414)
 - Importieren von *.hrm Daten (z.B. RS800)
